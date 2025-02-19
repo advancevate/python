@@ -13,12 +13,12 @@ class Personage:
               f'weapon: {self.weapon} damage: {self.dmg}')
 
 class Warrior(Personage):
-    def __init__(self, name, hero_class, lvl, hp,weapon, dmg, armor):
-        super().__init__(name, hero_class, lvl, hp,weapon, dmg)
+    def __init__(self, name, hero_class, lvl, hp, weapon, dmg, armor):
+        super().__init__(name, hero_class, lvl, hp, weapon, dmg)
         self.armor = armor
 
     def __calculate_hp(self):
-        return self.hp + (self.armor * 0.5)  #test
+        return self.hp + (self.armor * 0.5)  # test
 
     def info_pers(self):
         effective_hp = self.__calculate_hp()
@@ -27,22 +27,10 @@ class Warrior(Personage):
         print(f"effective hp: {effective_hp}")
 
     def warrior_attack(self):
-        if self.hp > 50 and self.armor !=0:
+        if self.hp > 50 and self.armor != 0:
             print(f"{self.name} attacks\n")
         else:
             print(f"{self.name}: low hp\n")
-
-class OnHike:
-    def __init__(self):
-        self.list_hero = []
-
-    def add_hero(self, hero):
-        self.list_hero.append(hero)
-
-    def print_heroes_hike(self):
-        print("heroes on hike:")
-        for x in self.list_hero:
-            print(f" - {x.name}")
 
 class Mage(Personage):
     def __init__(self, name, hero_class, lvl, hp, weapon, dmg, mana):
@@ -106,11 +94,36 @@ class Rogue(Personage):
         super().info_pers()
         print(f'stealth: {self.stealth}')
 
-#пример использования новых классов
+class OnHike:
+    def __init__(self):
+        self.list_hero = []
+
+    def add_hero(self, hero):
+        self.list_hero.append(hero)
+
+    def print_heroes_hike(self):
+        print("heroes on hike:")
+        for x in self.list_hero:
+            print(f" - {x.name}")
+
+#создание объектов персонажей
+warrior = Warrior('Oleg', 'warrior', 19, 130.5, 'two-handed sword', 35, 50)
 mage = Mage('Elena', 'mage', 15, 90, 'staff', 25, 100)
 archer = Archer('Ivan', 'archer', 18, 110, 'bow', 30, 80)
 healer = Healer('Anna', 'healer', 14, 100, 'wand', 15, 40)
 rogue = Rogue('Dmitry', 'rogue', 20, 120, 'dagger', 40, 60)
+
+#создание объекта похода и добавление героев
+hike = OnHike()
+hike.add_hero(warrior)
+hike.add_hero(mage)
+hike.add_hero(archer)
+hike.add_hero(healer)
+hike.add_hero(rogue)
+
+#вывод информации о персонажах
+warrior.info_pers()
+warrior.warrior_attack()
 
 mage.info_pers()
 mage.cast_spell()
@@ -124,16 +137,5 @@ healer.heal()
 rogue.info_pers()
 rogue.sneak_attack()
 
-#добавление героев в поход
-hike = OnHike()
-hike.add_hero(Warrior)
-hike.add_hero(mage)
-hike.add_hero(archer)
-hike.add_hero(healer)
-hike.add_hero(rogue)
-
-hike.print_heroes_hike()
-
-warrior = Warrior('Oleg', 'warrior', 19, 130.5, 'two-handed sword', 35, 50)
-warrior.info_pers()
-warrior.warrior_attack()
+#вывод списка героев в походе
+hike.print_heroes_hike() 
